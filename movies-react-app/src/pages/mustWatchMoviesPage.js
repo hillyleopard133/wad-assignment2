@@ -4,7 +4,6 @@ import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
 import Spinner from '../components/spinner'
-import AddToPlaylistIcon from '../components/cardIcons/addToPlaylist'
 import RemoveFromPlaylistIcon from '../components/cardIcons/removeFromPlaylist'
 
 const MustWatchMoviesPage = () => {
@@ -30,8 +29,6 @@ const MustWatchMoviesPage = () => {
     q.data.genre_ids = q.data.genres.map(g => g.id)
     return q.data
   });
-
-  const toDo = () => true;
 
   return (
     <PageTemplate

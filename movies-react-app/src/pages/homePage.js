@@ -4,7 +4,6 @@ import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
-import Pagination from '../components/pagination';
 
 const HomePage = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +33,6 @@ const HomePage = (props) => {
   // Redundant, but necessary to avoid app crashing.
   const favorites = movies.filter(m => m.favorite)
   localStorage.setItem('favorites', JSON.stringify(favorites))
-  const addToFavorites = (movieId) => true 
 
   return (
     <>

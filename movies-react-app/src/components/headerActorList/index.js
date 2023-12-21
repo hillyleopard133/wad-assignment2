@@ -1,12 +1,10 @@
 import React from "react";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
 
 const Header = (props ) => {
   
   const title = props.title
-  const navigate = useNavigate();
 
   return (
     <Paper 

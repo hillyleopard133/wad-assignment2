@@ -10,25 +10,19 @@ import Typography from "@mui/material/Typography";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 
 export default function MovieCardUpcoming({ movie, action }) {
-  const { playlist, addToPlaylist } = useContext(MoviesContext);
+  const { playlist} = useContext(MoviesContext);
 
   if (playlist.find((id) => id === movie.id)) {
     movie.playlist = true;
   } else {
     movie.playlist = false
   }
-
-  const handleAddToPlaylist = (e) => {
-    e.preventDefault();
-    addToPlaylist(movie);
-  };
 
   return (
     <Card sx={{ maxWidth: 345 }}>
