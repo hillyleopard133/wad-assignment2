@@ -45,9 +45,10 @@ const SiteHeader = ({ history }) => {
   };
 
   let location = useLocation();
-  const { from } = location.state ? { from: location.state.from.pathname } : { from: "/" };
+  const fromPath = location?.state?.from?.pathname || "/"; 
+  const { from } = location.state ? { from: fromPath } : { from: "/" };
 
-  if (context.isAuthenticated === false && location.pathname !== "/signup") {
+  if (context.isAuthenticated === false && location?.pathname !== "/signup") {
     return <Navigate to={from} />;
   }
 

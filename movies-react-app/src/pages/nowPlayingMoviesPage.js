@@ -11,7 +11,7 @@ const NowPlayingPage = (props) => {
 
   const { data, error, isLoading, isError, refetch } = useQuery(
     ["now_playing", currentPage],
-    getNowPlaying
+    () => getNowPlaying(currentPage)
   );
 
   if (isLoading) {

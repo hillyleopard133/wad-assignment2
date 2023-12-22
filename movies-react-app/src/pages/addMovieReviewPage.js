@@ -8,11 +8,11 @@ import Spinner from "../components/spinner";
 
 const WriteReviewPage = (props) => {
   const location = useLocation();
-  const movieId = location.state.movieId;
+  const id = location.state.movieId;
 
   const { data: movie, error, isLoading, isError } = useQuery(
-    ["movie", { id: movieId }],
-    getMovie
+    ["movie", { id: id }],
+    () => getMovie(id)
   );
 
   if (isLoading) {

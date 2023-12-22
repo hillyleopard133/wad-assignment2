@@ -10,7 +10,7 @@ const TrendingPage = (props) => {
 
   const { data, error, isLoading, isError, refetch } = useQuery(
     ["trending", currentPage],
-    getTrending
+    () => getTrending(currentPage)
   );
 
   if (isLoading) {

@@ -12,17 +12,17 @@ const MoviePage = (props) => {
   const { id } = useParams();
   const { data: movie, error, isLoading, isError } = useQuery(
     ["movie", { id: id }],
-    getMovie
+    () => getMovie(id)
   );
 
   const { data: recs} = useQuery(
     ["recommendations", { id: id }],
-    getMovieRecommendations
+    () => getMovieRecommendations(id)
   );
 
   const { data} = useQuery(
     ["credits", { id: id }],
-    getMovieCredits
+    () => getMovieCredits(id)
   );
 
   const credits = data && data.cast ? data.cast : [];

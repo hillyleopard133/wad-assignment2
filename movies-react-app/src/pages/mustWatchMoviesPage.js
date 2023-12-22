@@ -14,7 +14,7 @@ const MustWatchMoviesPage = () => {
     movieIds.map((movieId) => {
       return {
         queryKey: ["movie", { id: movieId }],
-        queryFn: getMovie,
+        queryFn: () => getMovie(movieId),
       };
     })
   );

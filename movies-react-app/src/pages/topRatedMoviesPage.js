@@ -10,7 +10,7 @@ const TopRatedPage = (props) => {
 
   const { data, error, isLoading, isError, refetch } = useQuery(
     ["top_rated", currentPage],
-    getTopRated
+    () => getTopRated(currentPage)
   );
 
   if (isLoading) {

@@ -10,7 +10,7 @@ const UpcomingPage = (props) => {
 
   const { data, error, isLoading, isError, refetch } = useQuery(
     ["upcoming", currentPage],
-    getUpcoming
+    () => getUpcoming(currentPage)
   );
   
 

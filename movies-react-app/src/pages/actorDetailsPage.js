@@ -12,12 +12,12 @@ const ActorPage = (props) => {
   const { id } = useParams();
   const { data: actor, error, isLoading, isError } = useQuery(
     ["actor", { id: id }],
-    getActor
+    () => getActor(id)
   );
 
   const { data } = useQuery(
     ["credits", { id: id }],
-    getActorCredits
+    () => getActorCredits(id)
   );
 
   const credits = data && data.cast ? data.cast : [];
