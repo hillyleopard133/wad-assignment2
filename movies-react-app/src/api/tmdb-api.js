@@ -143,7 +143,7 @@ export const getMovieImages  = async (id) => {
 };
 
 
-  export const getMovieReviews = (id) => {
+  export const getMovieReviews1 = (id) => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
     )
@@ -152,4 +152,16 @@ export const getMovieImages  = async (id) => {
         // console.log(json.results);
         return json.results;
       });
+  };
+
+  export const getMovieReviews = async (id) => {
+    const response = await fetch(
+      `http://localhost:8080/api/movies/tmdb/movie/reviews?id=${id}`,
+       {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }
+    }
+    )
+    return response.json();
   };
