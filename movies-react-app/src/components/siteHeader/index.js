@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -7,10 +7,11 @@ import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { AuthContext } from "../../contexts/authContext";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -21,10 +22,12 @@ const SiteHeader = ({ history }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   
+  const context = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const menuOptions = [
-    { label: "Home", path: "/" },
+    { label: "Home", path: "/home" },
     { label: "Upcoming", path: "/upcoming" },
     { label: "Top Rated", path: "/top_rated" },
     { label: "Trending", path: "/trending" },
@@ -41,7 +44,14 @@ const SiteHeader = ({ history }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  return (
+  let location = useLocation();
+  const { from } = location.state ? { from: location.state.from.pathname } : { from: "/" };
+
+  if (context.isAuthenticated === false) {
+    return <Navigate to={from} />;
+}
+
+  return context.isAuthenticated ? (
     <>
       <AppBar position="fixed" color="secondary">
         <Toolbar>
@@ -103,7 +113,15 @@ const SiteHeader = ({ history }) => {
         </Toolbar>
       </AppBar>
       <Offset />
+      <p>
+      Welcome {context.userName}! <button onClick={() => context.signout()}>Sign out</button>
+    </p>
     </>
+  ) : (
+    <p>
+      You are not logged in{" "}
+      <button onClick={() => navigate('/login')}>Login</button>
+    </p>
   );
 };
 
