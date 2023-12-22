@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useQuery } from 'react-query';
 import {addFavourite } from "../api/movies-api";
 import { getFavourites} from "../api/movies-api";
+import { AuthContext } from "../contexts/authContext";
 
 export const MoviesContext = React.createContext(null);
 
 const MoviesContextProvider = (props) => {
+  const authContext = useContext(AuthContext);
   const [favorites, setFavorites] = useState( [] )
   const [playlist, setPlaylist] = useState( [] )
   const [myReviews, setMyReviews] = useState( {} ) 
 
-  const { data, error, isLoading, isError, refetch } = useQuery(
-    () => getFavourites("brona")
-  );
-
-  console.log(data);
+  useEffect(() => {
+    getFavourites(authContext.userName).then((favorites) => {
+      setFavorites(favorites);
+    });
+  });
 
   const addToFavorites = (movie) => {
     let newFavorites = [];
