@@ -6,11 +6,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const AddToFavoritesIcon = ({ movie }) => {
   const context = useContext(MoviesContext);
+  const authContext = useContext(AuthContext);
 
   const handleAddToFavorites = (e) => {
     e.preventDefault();
-    //context.addToFavorites2(AuthContext.userName, movie);
-    context.addToFavorites(movie);
+    context.addToFavorites2(authContext.userName, movie);
+    //context.addToFavorites(movie);
   };
 
   return (

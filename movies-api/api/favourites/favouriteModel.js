@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const FavouriteSchema = new Schema({
-    username: {type: String, required: true },
+    username: {type: String},
     movieId: {type: String, required: true }
 });
 
