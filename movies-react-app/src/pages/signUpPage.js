@@ -25,19 +25,21 @@ const SignUpPage = props => {
 
   return (
     <>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h2>SignUp page</h2>
       <p>You must register a username and password to log in </p>
-      <input value={userName} placeholder="user name" onChange={e => {
+      <input value={userName} placeholder="user name" style={{ margin: "10px" }} onChange={e => {
         setUserName(e.target.value);
       }}></input><br />
-      <input value={password} type="password" placeholder="password" onChange={e => {
+      <input value={password} type="password" placeholder="password" style={{ margin: "10px" }} onChange={e => {
         setPassword(e.target.value);
       }}></input><br />
-      <input value={passwordAgain} type="password" placeholder="password again" onChange={e => {
+      <input value={passwordAgain} type="password" placeholder="password again" style={{ margin: "10px" }} onChange={e => {
         setPasswordAgain(e.target.value);
       }}></input><br />
       {/* Login web form  */}
-      <button onClick={register}>Register</button>
+      <button onClick={register} style={{ margin: "10px" }}>Register</button>
+      </div>
     </>
   );
 };
