@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useQuery } from 'react-query';
-import {addFavourite } from "../api/movies-api";
+import {addFavourite, deleteFavourite } from "../api/movies-api";
 import { getFavourites} from "../api/movies-api";
 import { AuthContext } from "../contexts/authContext";
 
@@ -54,6 +54,13 @@ const MoviesContextProvider = (props) => {
     ) )
   };
 
+  const removeFromFavorites2 = async (username, movie) => {
+    const result = await deleteFavourite(username, movie.id);
+    removeFromFavorites(movie);
+    //console.log(result.code);
+    //return (result.code == 201) ? true : false;
+  };
+
   const removeFromPlaylist = (movie) => {
     setPlaylist( playlist.filter(
       (mId) => mId !== movie.id
@@ -76,6 +83,7 @@ const MoviesContextProvider = (props) => {
         removeFromPlaylist,
         addReview,
         addToFavorites2,
+        removeFromFavorites2
       }}
     >
       {props.children}

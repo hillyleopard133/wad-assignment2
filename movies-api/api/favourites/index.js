@@ -17,10 +17,12 @@ router.post('/', asyncHandler(async (req, res) => {
 }));
 
 // delete favourite
-router.delete('/:id', async (req, res) => {
-    if (req.body._id) delete req.body._id;
-    const result = await Favourite.deleteOne({
-        _id: req.params.id,
+router.delete('/deleteFav', async (req, res) => {
+    const { movieId, username } = req.query;
+
+    const result = await Favourite.deleteMany({
+        movieId: movieId,
+        username: username,
     });
     if (result.deletedCount) {
         res.status(204).json();
