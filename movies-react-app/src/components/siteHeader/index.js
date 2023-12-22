@@ -118,10 +118,12 @@ const SiteHeader = ({ history }) => {
     </p>
     </>
   ) : (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
     <p>
       You are not logged in{" "}
       <button onClick={() => navigate('/login')}>Login</button>
     </p>
+    </div>
   );
 };
 
