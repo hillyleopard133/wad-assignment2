@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {addFavourite } from "../api/movies-api";
 
 export const MoviesContext = React.createContext(null);
 
@@ -18,7 +19,12 @@ const MoviesContextProvider = (props) => {
     setFavorites(newFavorites)
   };
 
-  
+  const addToFavorites2 = async (username, movie) => {
+    const result = await addFavourite(username, movie.id);
+    console.log(result.code);
+    return (result.code == 201) ? true : false;
+  };
+
   const addToPlaylist = (movie) => {
     let newPlaylist = [];
     if (!playlist.includes(movie.id)){
@@ -58,6 +64,7 @@ const MoviesContextProvider = (props) => {
         removeFromFavorites,
         removeFromPlaylist,
         addReview,
+        addToFavorites2,
       }}
     >
       {props.children}
