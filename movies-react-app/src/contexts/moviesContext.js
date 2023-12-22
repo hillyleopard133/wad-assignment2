@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useQuery } from 'react-query';
 import {addFavourite } from "../api/movies-api";
+import { getFavourites} from "../api/movies-api";
 
 export const MoviesContext = React.createContext(null);
 
@@ -7,6 +9,12 @@ const MoviesContextProvider = (props) => {
   const [favorites, setFavorites] = useState( [] )
   const [playlist, setPlaylist] = useState( [] )
   const [myReviews, setMyReviews] = useState( {} ) 
+
+  const { data, error, isLoading, isError, refetch } = useQuery(
+    () => getFavourites("brona")
+  );
+
+  console.log(data);
 
   const addToFavorites = (movie) => {
     let newFavorites = [];
@@ -21,6 +29,7 @@ const MoviesContextProvider = (props) => {
 
   const addToFavorites2 = async (username, movie) => {
     const result = await addFavourite(username, movie.id);
+    addToFavorites(movie);
     console.log(result.code);
     return (result.code == 201) ? true : false;
   };

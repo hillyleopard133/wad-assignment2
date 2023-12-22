@@ -29,4 +29,11 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// Get favourites by username
+router.get('/myFavs', asyncHandler(async (req, res) => {
+    const { username } = req.query;
+    //const favourites = await Favourite.findFavouritesByUserName(username).select('movieId');
+    const favourites = await Favourite.distinct('movieId', { username: username })
+    res.status(200).json(favourites);
+}));
 export default router;

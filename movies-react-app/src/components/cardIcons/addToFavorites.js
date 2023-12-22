@@ -11,7 +11,6 @@ const AddToFavoritesIcon = ({ movie }) => {
   const handleAddToFavorites = (e) => {
     e.preventDefault();
     context.addToFavorites2(authContext.userName, movie);
-    //context.addToFavorites(movie);
   };
 
   return (

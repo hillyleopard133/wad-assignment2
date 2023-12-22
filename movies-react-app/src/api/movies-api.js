@@ -24,6 +24,18 @@ export const addFavourite = async(username, movieId) => {
     )
         return res.json();
 };
+
+export const getFavourites = async(username) => {
+    const response = await fetch(
+        `http://localhost:8080/api/favourites/myFavs?username=${username}`,
+        {
+            headers: {
+                'Authorization': window.localStorage.getItem('token')
+            }
+        }
+    )
+    return response.json();
+};
   
   
   export const login = async (username, password) => {
