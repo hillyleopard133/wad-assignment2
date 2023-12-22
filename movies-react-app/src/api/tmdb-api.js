@@ -1,62 +1,47 @@
-export const getMovies = (args) => {
-  const [, page] = args.queryKey;
-  return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
+export const getMovies = async (page = 1) => {
+  const response = await fetch(
+    `http://localhost:8080/api/movies/tmdb/movies?page=${page}`,
+     {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
     }
-    return response.json();
-  })
-  .catch((error) => {
-     throw error
-  });
+  }
+  )
+  return response.json();
 };
 
-  export const getUpcoming = (args) => {
-    const [, page] = args.queryKey;
-    return fetch(
-      ` https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
-    ).then((response) => {
-      if (!response.ok) {
-        throw new Error(response.json().message);
-      }
-      return response.json();
-    })
-    .catch((error) => {
-       throw error
-    });
-  };
+export const getUpcoming = async () => {
+  const response = await fetch(
+    'http://localhost:8080/api/movies/tmdb/upcoming', {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  )
+  return response.json();
+};
 
-  export const getTopRated = (args) => {
-    const [, page] = args.queryKey;
-    return fetch(
-      ` https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
-    ).then((response) => {
-      if (!response.ok) {
-        throw new Error(response.json().message);
-      }
-      return response.json();
-    })
-    .catch((error) => {
-       throw error
-    });
-  };
+export const getTrending = async () => {
+  const response = await fetch(
+    'http://localhost:8080/api/movies/tmdb/trending', {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  )
+  return response.json();
+};
 
-  export const getTrending = (args) => {
-    const [, page] = args.queryKey;
-    return fetch(
-      ` https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${page}`
-    ).then((response) => {
-      if (!response.ok) {
-        throw new Error(response.json().message);
-      }
-      return response.json();
-    })
-    .catch((error) => {
-       throw error
-    });
-  };
+export const getTopRated = async () => {
+  const response = await fetch(
+    'http://localhost:8080/api/movies/tmdb/top_rated', {
+    headers: {
+      'Authorization': window.localStorage.getItem('token')
+    }
+  }
+  )
+  return response.json();
+};
 
   export const getNowPlaying = (args) => {
     const [, page] = args.queryKey;

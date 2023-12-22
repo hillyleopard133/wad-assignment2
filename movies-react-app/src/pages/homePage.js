@@ -10,7 +10,7 @@ const HomePage = (props) => {
   //const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
   const { data, error, isLoading, isError, refetch } = useQuery(
     ["discover", currentPage],
-    getMovies
+    () => getMovies(currentPage)
   );
   
 
